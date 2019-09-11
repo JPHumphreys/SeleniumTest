@@ -62,7 +62,36 @@ public class GoogleSeleniumTest {
 
         Thread.sleep(1000);
 
+    }
 
+    @Test
+    public void seleniumSimpleInput() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://www.seleniumeasy.com/test/basic-first-form-demo.html");
+        Thread.sleep(3000);
+
+        WebElement searchField = driver.findElementById("user-message");
+        assertTrue(searchField.isDisplayed());
+        searchField.sendKeys("beep boop");
+        Thread.sleep(3000);
+
+        WebElement inp1 = driver.findElementById("sum1");
+        inp1.sendKeys("12");
+
+        WebElement inp2 = driver.findElementById("sum2");
+        inp2.sendKeys("7");
+        Thread.sleep(3000);
+    }
+
+    @Test
+    public void seleniumCheckboxDemo() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://www.seleniumeasy.com/test/basic-checkbox-demo.html");
+        Thread.sleep(3000);
+
+        WebElement checkbox = driver.findElementById("isAgeSelected");
+        checkbox.click();
+        Thread.sleep(2000);
 
 
     }
