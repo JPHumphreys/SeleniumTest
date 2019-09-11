@@ -35,13 +35,22 @@ public class GoogleSeleniumTest {
         driver.manage().window().maximize();//max screen
         driver.get("http://google.com");
         Thread.sleep(2000);
+
         WebElement searchField = driver.findElement(By.name("q"));
         assertTrue(searchField.isDisplayed());
         searchField.sendKeys("funny cat pictures");
         Thread.sleep(5000);
+
         WebElement submitButton = driver.findElement(By.name("btnK"));
         submitButton.click();
         Thread.sleep(5000);
+
+        WebElement linkToBiggerPictures = driver.findElementByLinkText("Images for funny cat");//partial link test too is an option
+        linkToBiggerPictures.click();
+        Thread.sleep(5000);
+
+
+
 
 
     }
