@@ -17,7 +17,7 @@ public class GoogleSeleniumTest {
 
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\Admin\\IdeaProjects\\SeleniumTesting\\src\\test\\java\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Admin\\IdeaProjects\\SeleniumTest\\src\\test\\java\\resources\\chromedriver.exe");
 
         driver = new ChromeDriver();
 
@@ -26,43 +26,77 @@ public class GoogleSeleniumTest {
 
     }
 
-
-
     @After
     public void tearDown(){
         driver.close();
     }
 
-
     @Test
-    public void searchTest() throws InterruptedException {
-        driver.manage().window().maximize();//max screen
-        driver.get("http://google.com");
+    public void clickIndexButton() throws InterruptedException{
+
+        WebElement button = driver.findElementById("index-register-button");
+        button.click();
         Thread.sleep(2000);
 
-        WebElement searchField = driver.findElement(By.name("q"));
-        assertTrue(searchField.isDisplayed());
-        searchField.sendKeys("funny cat pictures");
-        Thread.sleep(5000);
+    }
 
-        WebElement submitButton = driver.findElement(By.name("btnK"));
-        submitButton.click();
-        Thread.sleep(5000);
+    @Test
+    public void clickRegisterButton() throws InterruptedException{
+        WebElement button = driver.findElementById("register-button");
+        button.click();
+        Thread.sleep(2000);
+    }
 
-        WebElement linkToBiggerPictures = driver.findElementByLinkText("Images for funny cat");//partial link test too is an option
-        linkToBiggerPictures.click();
-        Thread.sleep(5000);
+    @Test
+    public void enterDetails_RegisterUsername() throws InterruptedException{
 
-        int counter = 1;
-        for(int i = 0; i < 100; i++)
-        {
-            js.executeScript("window.scrollBy(" + i + "," + (counter++) +")"); //Scroll vertically down by 1000 pixels
-            Thread.sleep(50);
-        }
-
-        Thread.sleep(1000);
+        WebElement input = driver.findElementById("register-username");
+        input.sendKeys("selenium");
+        Thread.sleep(2000);
 
     }
+
+    @Test
+    public void enterDetails_RegisterPassword() throws InterruptedException{
+
+        WebElement input = driver.findElementById("register-password");
+        input.sendKeys("selenium");
+        Thread.sleep(2000);
+
+    }
+
+
+
+
+    @Test
+    public void mainTest() throws InterruptedException {
+        driver.manage().window().maximize();//max screen
+        driver.get("http://127.0.0.1:5500/");
+        Thread.sleep(3000);
+
+        clickIndexButton();
+
+        enterDetails_RegisterUsername();
+        enterDetails_RegisterPassword();
+        clickRegisterButton();
+
+        //searchField.sendKeys("funny cat pictures");
+
+        //WebElement submitButton = driver.findElement(By.name("btnK"));
+        //submitButton.click();
+
+        //WebElement linkToBiggerPictures = driver.findElementByLinkText("Images for funny cat");//partial link test too is an option
+        //linkToBiggerPictures.click();
+
+       // int counter = 1;
+       // for(int i = 0; i < 100; i++)
+       // {
+       //     js.executeScript("window.scrollBy(" + i + "," + (counter++) +")"); //Scroll vertically down by 1000 pixels
+       //     Thread.sleep(50);
+       // }
+
+    }
+
 
     @Test
     public void seleniumSimpleInput() throws InterruptedException {
